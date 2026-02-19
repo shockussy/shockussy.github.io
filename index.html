@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>shockussy | Live</title>
 <style>
-/* --- existing styles --- */
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; height:100vh; overflow:hidden; }
 .container { display:flex; height:100vh; padding:30px 40px; gap:30px; }
@@ -14,8 +13,7 @@ body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; hei
 
 /* Profile */
 .profile-block { background:#524b45; border-radius:8px; padding:15px; display:flex; align-items:center; gap:20px; }
-.profile-pic { width:100px; height:100px; background:url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat; border-radius:50%; border:2px solid #22201d; flex-shrink:0; transition:transform 0.3s; }
-.profile-pic:hover { transform:scale(1.05); }
+.profile-pic { width:100px; height:100px; background:url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat; border-radius:50%; border:2px solid #22201d; flex-shrink:0; }
 .profile-info { display:flex; flex-direction:column; color:#c7c4bf; }
 .profile-info h1 { font-size:26px; font-weight:700; color:#e1ddd9; margin-bottom:6px; }
 .profile-info small { font-size:12px; color:#99958f; }
@@ -40,13 +38,6 @@ body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; hei
 .info-header h2 { font-weight:700; font-size:18px; color:#c7c4bf; }
 .level-badge { border:2px solid #a24141; border-radius:50%; width:38px; height:38px; color:#cda9a9; font-weight:700; font-size:16px; display:flex; justify-content:center; align-items:center; box-shadow:0 0 8px #b35a5aaa; user-select:none; }
 .block-content { font-size:14px; color:#99948f; min-height:80px; }
-
-/* Spotify Now Playing */
-.spotify-now { display:flex; gap:15px; align-items:center; margin-bottom:10px; }
-.spotify-art { width:60px; height:60px; border-radius:6px; box-shadow:0 0 10px #1db954aa; object-fit:cover; }
-.spotify-info { display:flex; flex-direction:column; justify-content:center; }
-.spotify-title { font-weight:700; color:#8fbf5f; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.spotify-artist { font-size:14px; color:#a1a288; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 /* Games scroll */
 .scroll-block { max-height:220px; overflow-y:auto; padding-right:8px; }
@@ -98,18 +89,13 @@ body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; hei
       <div class="block-content">Filthy Peasant<br>100 XP</div>
     </div>
 
-    <!-- Spotify Now Playing -->
+    <!-- Playlist Block -->
     <div class="info-block">
-      <div class="info-header"><h2>Now Playing</h2></div>
-      <div class="spotify-now">
-        <img src="" class="spotify-art" id="spotify-art">
-        <div class="spotify-info">
-          <div class="spotify-title" id="spotify-title">Loading...</div>
-          <div class="spotify-artist" id="spotify-artist"></div>
-        </div>
-      </div>
-      <!-- Embedded Playlist -->
-      <iframe src="https://open.spotify.com/embed/playlist/7ti9N5pvaPuL21gQ9hhZCg" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:6px; box-shadow:0 0 12px #1db954aa;"></iframe>
+      <div class="info-header"><h2>Playlist</h2></div>
+      <iframe src="https://open.spotify.com/embed/playlist/7ti9N5pvaPuL21gQ9hhZCg"
+              width="100%" height="80" frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              style="border-radius:6px; box-shadow:0 0 12px #1db954aa;"></iframe>
     </div>
 
     <!-- Games -->
@@ -129,55 +115,6 @@ body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; hei
     </div>
   </div>
 </div>
-
-<!-- Spotify API Script -->
-<script>
-const clientId = "79f37794bfa8475792616ebf88552156";
-const clientSecret = "9b1f8b01df424b61b986cbaf9650eea1";
-const playlistId = "7ti9N5pvaPuL21gQ9hhZCg";
-
-async function getToken() {
-  const resp = await fetch('https://accounts.spotify.com/api/token', {
-    method:'POST',
-    headers:{
-      'Content-Type':'application/x-www-form-urlencoded',
-      'Authorization':'Basic '+btoa(clientId+':'+clientSecret)
-    },
-    body:'grant_type=client_credentials'
-  });
-  const data = await resp.json();
-  return data.access_token;
-}
-
-async function getPlaylistTracks(token){
-  const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`,{
-    headers:{ 'Authorization':'Bearer '+token }
-  });
-  const data = await res.json();
-  return data.items.map(i=>({
-    title:i.track.name,
-    artist:i.track.artists.map(a=>a.name).join(', '),
-    img:i.track.album.images[0].url
-  }));
-}
-
-async function startSpotify(){
-  const token = await getToken();
-  const tracks = await getPlaylistTracks(token);
-  let index=0;
-  function updateTrack(){
-    const t=tracks[index];
-    document.getElementById('spotify-art').src=t.img;
-    document.getElementById('spotify-title').textContent=t.title;
-    document.getElementById('spotify-artist').textContent=t.artist;
-    index=(index+1)%tracks.length;
-  }
-  updateTrack();
-  setInterval(updateTrack,7000);
-}
-
-startSpotify();
-</script>
 
 </body>
 </html>
