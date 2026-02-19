@@ -25,44 +25,43 @@ body {
 .profile-block {
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  background: rgba(82,75,69,0.7); /* 70% transparent */
+  justify-content:space-between; /* keeps level badge right */
+  background: rgba(82,75,69,0.7); /* 70% transparent top bar */
   border-radius:8px;
   padding:15px 20px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2); /* soft glow */
   gap:20px;
-  box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
 .profile-pic {
   width:100px;
   height:100px;
   background:url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat;
-  border-radius:50%;
+  border-radius:6px; /* square with slightly rounded corners */
   border:2px solid #22201d;
   flex-shrink:0;
 }
 
-.profile-info { display:flex; flex-direction:column; color:#c7c4bf; }
-
-.name-status { display:flex; flex-direction:column; gap:4px; }
-
-.profile-info h1 { font-size:26px; font-weight:700; color:#e1ddd9; }
-.status-badge {
-  display:inline-block;
-  background:#3c3a36;
-  color:#f5f0f0;
-  font-size:13px;
-  font-weight:600;
-  padding:4px 10px;
-  border-radius:15px;
-  box-shadow:0 0 8px rgba(255,255,255,0.2);
-  max-width:220px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.profile-info {
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  color:#e1ddd9;
 }
 
-.profile-info small { font-size:12px; color:#99958f; margin-top:3px; }
+.profile-info h1 { font-size:26px; font-weight:700; }
+
+.status-text {
+  font-size:13px;
+  font-weight:600;
+  color:#f5f0f0;
+  background:none; /* no box behind text */
+  padding:0;
+  border-radius:0;
+  box-shadow:none;
+}
+
+.profile-info small { font-size:12px; color:#99958f; }
 
 .level-badge {
   border:2px solid #a24141;
@@ -152,10 +151,8 @@ body {
     <div class="profile-block">
       <div class="profile-pic" title="Profile picture"></div>
       <div class="profile-info">
-        <div class="name-status">
-          <h1>shockussy</h1>
-          <span class="status-badge">Currently In-Game: Counter-Strike 2</span>
-        </div>
+        <h1>shockussy</h1>
+        <span class="status-text">Currently In-Game: Counter-Strike 2</span>
         <small>SLVT</small>
       </div>
       <div class="level-badge">17</div>
