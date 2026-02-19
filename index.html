@@ -1,197 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>shockussy | Live</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shockussy | Live</title>
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://i.imgur.com/DduNOt3.png" type="image/png">
+body {
+  background:#bfb8ae; /* lighter background */
+  font-family:'Segoe UI',sans-serif;
+  color:rgba(225,221,217,0.9);
+  height:100vh;
+  overflow:hidden;
+}
 
-  <style>
-    /* Reset */
-    * { margin:0; padding:0; box-sizing:border-box; }
+/* Container */
+.container { display:flex; height:100vh; padding:30px 40px; gap:30px; }
+.left-col { flex:3; display:flex; flex-direction:column; gap:30px; }
+.right-col { flex:1.3; display:flex; flex-direction:column; gap:20px; }
 
-    body {
-      background: rgba(191,184,174,0.7);
-      font-family: 'Segoe UI', sans-serif;
-      color: rgba(225,221,217,0.9);
-      height: 100vh;
-      overflow: hidden;
-    }
+/* Top bar */
+.top-bar {
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:0;
+}
 
-    .container {
-      display: flex;
-      height: 100vh;
-      padding: 30px 40px;
-      gap: 30px;
-    }
+.profile-section {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-    .left-col { flex:3; display:flex; flex-direction:column; gap:30px; }
+.profile-pic {
+  width:100px;
+  height:100px;
+  background:url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat;
+  border-radius:6px;
+  border:2px solid #22201d;
+}
 
-    /* Profile block */
-    .profile-block {
-      display:flex;
-      align-items:center;
-      gap:20px;
-    }
+.name-sens {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:3px;
+}
 
-    .profile-pic {
-      width: 100px;
-      height: 100px;
-      background: url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat;
-      border-radius:0; /* square */
-      border: 2px solid #22201d;
-      flex-shrink:0;
-    }
+.name-sens h1 {
+  font-size:26px;
+  font-weight:700;
+  color:#e1ddd9;
+}
 
-    .profile-info {
-      display:flex;
-      flex-direction:column;
-      text-align:center;
-      flex:1;
-    }
+.name-sens small {
+  font-size:12px;
+  color:#99958f;
+}
 
-    .profile-info h1 {
-      font-size:28px;
-      font-weight:700;
-      color: rgba(225,221,217,0.9);
-    }
+.status-text {
+  margin-left:auto; /* push it between name and level badge */
+  font-size:14px;
+  font-weight:600;
+  color:#f5f0f0;
+}
 
-    .profile-info small {
-      font-size:14px;
-      color: rgba(153,149,143,0.9);
-      margin-bottom:5px;
-    }
+.level-badge {
+  border:2px solid #a24141;
+  border-radius:50%;
+  width:38px;
+  height:38px;
+  color:#ffffff; /* changed to white */
+  font-weight:700;
+  font-size:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-    .status {
-      font-size:14px;
-      color:#f5f0f0;
-      margin:3px 0;
-      font-weight:600;
-    }
+/* Stream block */
+.stream-block { flex-grow:1; background: rgba(82,75,69,0.7); border-radius:8px; box-shadow:0 0 15px rgba(255,255,255,0.2) inset; overflow:hidden; position:relative; }
+.stream-block iframe { width:100%; height:100%; border:none; box-shadow:0 0 12px rgba(255,255,255,0.15) inset; }
 
-    .sens {
-      font-size:12px;
-      color: #c7c4bf;
-    }
+.live-badge {
+  position:absolute; top:15px; left:15px;
+  background:#7a2f2f; border:1.5px solid #b35a5a;
+  border-radius:25px; padding:6px 18px; font-weight:600;
+  font-size:14px; color:#f5f0f0; display:flex; align-items:center; gap:10px;
+  user-select:none; box-shadow:0 0 12px rgba(255,255,255,0.25);
+}
+.live-dot { width:9px; height:9px; background:#f5f0f0; border-radius:50%; animation:pulse 1.5s infinite ease-in-out; }
+@keyframes pulse {0%,100%{opacity:1;}50%{opacity:0.4;}}
 
-    /* Stream block */
-    .stream-block {
-      flex-grow:1;
-      background: rgba(82,75,69,0.7);
-      border-radius:8px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.15);
-      overflow:hidden;
-      position:relative;
-    }
+/* Social links */
+.social-links {
+  margin-top:15px;
+  background: rgba(82,75,69,0.7);
+  border-radius:8px;
+  padding:15px 20px;
+  display:flex;
+  gap:15px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+.social-links a {
+  flex:1;
+  background:#3c3731;
+  color:#8ba174;
+  text-align:center;
+  padding:12px 0;
+  font-weight:600;
+  font-size:14px;
+  border-radius:6px;
+  text-decoration:none;
+  box-shadow: inset 0 -2px 0 #627a4f;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.social-links a:hover { background:#4a463f; box-shadow: inset 0 -4px 0 #90b062; transform:scale(1.02);}
+.social-links a.empty { background:#3c3731; color:#6b675f; cursor:default; box-shadow:none; }
+.social-links a.empty:hover { box-shadow:none; }
 
-    .stream-block iframe {
-      width:100%;
-      height:100%;
-      border:none;
-    }
+/* Info blocks */
+.info-block { background: rgba(82,75,69,0.7); border-radius:8px; padding:18px 22px; box-shadow:0 0 15px rgba(255,255,255,0.2); color:#c7c4bf; }
+.info-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
+.info-header h2 { font-weight:700; font-size:18px; color:#c7c4bf; }
+.block-content { font-size:14px; color:#99948f; min-height:80px; }
+.block-content p { margin-bottom:6px; }
 
-    .live-badge {
-      position:absolute;
-      top:15px;
-      left:15px;
-      background:#7a2f2f;
-      border:1.5px solid #b35a5a;
-      border-radius:25px;
-      padding:6px 18px;
-      font-weight:600;
-      font-size:14px;
-      color:#f5f0f0;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      user-select:none;
-      box-shadow:0 0 10px #b35a5aaa;
-    }
+/* Games scroll */
+.scroll-block { max-height:220px; overflow-y:auto; padding-right:8px; }
+.scroll-block::-webkit-scrollbar { width:6px; }
+.scroll-block::-webkit-scrollbar-thumb { background:#3c3731; border-radius:3px; }
 
-    .live-dot {
-      width:9px;
-      height:9px;
-      background:#f5f0f0;
-      border-radius:50%;
-      animation:pulse 1.5s infinite ease-in-out;
-    }
+/* Playlist iframe glow */
+.spotify-content iframe { box-shadow:0 0 15px rgba(29,185,84,0.25); border-radius:6px; }
 
-    @keyframes pulse {0%,100%{opacity:1;}50%{opacity:0.4;}}
-
-    /* Social links */
-    .social-links {
-      margin-top:15px;
-      display:flex;
-      gap:15px;
-    }
-
-    .social-links a {
-      flex:1;
-      background: rgba(60,55,49,0.7);
-      color:#8ba174;
-      text-align:center;
-      padding:12px 0;
-      font-weight:600;
-      font-size:14px;
-      border-radius:6px;
-      text-decoration:none;
-      box-shadow: inset 0 -2px 0 #627a4f;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    .social-links a:hover { background: rgba(74,70,63,0.7); box-shadow: inset 0 -4px 0 #90b062; }
-    .social-links a.empty { background: rgba(60,55,49,0.5); color:#6b675f; cursor:default; box-shadow:none; }
-
-    /* Right column */
-    .right-col { flex:1.3; display:flex; flex-direction:column; gap:20px; }
-
-    .info-block {
-      background: rgba(82,75,69,0.7);
-      border-radius:8px;
-      padding:18px 22px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.15);
-      color:#c7c4bf;
-    }
-
-    .info-header { font-weight:700; margin-bottom:8px; font-size:16px; }
-    .block-content { font-size:14px; color:#c7c4bf; }
-
-    /* Inventory text */
-    .inventory p { margin-bottom:5px; }
-
-    /* Scroll blocks */
-    .scroll-block { max-height:220px; overflow-y:auto; padding-right:8px; }
-    .scroll-block::-webkit-scrollbar { width:6px; }
-    .scroll-block::-webkit-scrollbar-thumb { background:#3c3731; border-radius:3px; }
-
-    @media (max-width:1000px){
-      .container { flex-direction:column; padding:20px; overflow-y:auto; height:100vh; }
-      .left-col,.right-col{ flex:unset; height:auto; }
-      .stream-block{ height:300px; }
-    }
-  </style>
+/* Responsive */
+@media (max-width:1000px){
+  .container { flex-direction:column; padding:20px; gap:20px; overflow-y:auto; height:100vh; }
+  .left-col,.right-col{ flex:unset; height:auto; }
+  .stream-block{ height:300px; }
+}
+</style>
 </head>
-
 <body>
+
 <div class="container">
 
   <!-- LEFT COLUMN -->
   <div class="left-col">
 
-    <!-- Profile -->
-    <div class="profile-block">
-      <div class="profile-pic" title="Profile picture"></div>
-      <div class="profile-info">
-        <h1>shockussy</h1>
-        <small>SLVT</small>
-        <div class="sens">1280x960 4:3 1600dpi 0.96 sens</div>
-        <div class="status">Currently In-Game: Counter-Strike 2</div>
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="profile-section">
+        <div class="profile-pic" title="Profile picture"></div>
+        <div class="name-sens">
+          <h1>shockussy</h1>
+          <small>Sensitivity: 1280x960 4:3, 1600 DPI, 0.96 sens</small>
+        </div>
       </div>
+      <span class="status-text">Currently In-Game: Counter-Strike 2</span>
+      <div class="level-badge">17</div>
     </div>
 
-    <!-- Stream -->
+    <!-- Twitch Stream -->
     <div class="stream-block">
       <div class="live-badge"><div class="live-dot"></div>LIVE</div>
       <iframe src="https://player.twitch.tv/?channel=shockussy&parent=shockussy.com&parent=www.shockussy.com" allowfullscreen></iframe>
@@ -210,39 +184,52 @@
   <!-- RIGHT COLUMN -->
   <div class="right-col">
 
-    <!-- Bio/Level -->
+    <!-- Info / Bio Box -->
     <div class="info-block">
-      <div class="info-header">Bio</div>
+      <div class="info-header"><h2>Info</h2></div>
       <div class="block-content">
-        Age: 23<br>
-        Height: 5'9"<br>
-        Favorite Weapon: AK-47<br>
-        Rank: Global Elite
+        <p>Age: 22</p>
+        <p>Height: 5'10"</p>
+        <p>Location: Your City</p>
+        <p>Favorite Game: Counter-Strike 2</p>
       </div>
     </div>
 
     <!-- Playlist -->
     <div class="info-block">
-      <div class="info-header">Playlist</div>
-      <div class="block-content">
-        Shockussy Playlist
+      <div class="info-header"><h2>Playlist</h2></div>
+      <div class="spotify-content">
+        <iframe src="https://open.spotify.com/embed/playlist/7ti9N5pvaPuL21gQ9hhZCg"
+                width="100%" height="80" frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+    </div>
+
+    <!-- Games -->
+    <div class="info-block scroll-block">
+      <div class="info-header"><h2>Games</h2></div>
+      <div class="games-list">
+        <p>Counter-Strike 2</p>
+        <p>Apex Legends</p>
+        <p>Path of Exile 2</p>
       </div>
     </div>
 
     <!-- Inventory -->
-    <div class="info-block scroll-block inventory">
-      <div class="info-header">Inventory</div>
+    <div class="info-block">
+      <h2>Inventory</h2>
       <div class="block-content">
-        <p>Logitech Superlight 2 Pro</p>
-        <p>BlackWidow V3 Mini HyperSpeed</p>
-        <p>Astro A50x</p>
-        <p>Razor Glass Mouse Pad</p>
-        <p>Xbox Series X Controller</p>
+        <p>Mouse: Logitech Superlight 2 Pro</p>
+        <p>Keyboard: BlackWidow V3 Mini HyperSpeed</p>
+        <p>Headset: Astro A50X</p>
+        <p>Mousepad: Razer Glass</p>
+        <p>Controller: Xbox Series X</p>
       </div>
     </div>
 
   </div>
 
 </div>
+
 </body>
 </html>
