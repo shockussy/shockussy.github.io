@@ -16,8 +16,8 @@ body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; hei
 .profile-pic { width:100px; height:100px; background:url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat; border-radius:50%; border:2px solid #22201d; flex-shrink:0; }
 .profile-info { display:flex; flex-direction:column; color:#c7c4bf; }
 .profile-info h1 { font-size:26px; font-weight:700; color:#e1ddd9; margin-bottom:6px; }
-.profile-info h1 span { font-size:16px; font-weight:500; color:#8ba174; margin-left:8px; }
-.profile-info small { font-size:12px; color:#99958f; }
+.status-badge { display:inline-block; margin-top:4px; background:#3c3a36; color:#f5f0f0; font-size:13px; font-weight:600; padding:4px 10px; border-radius:15px; box-shadow:0 0 6px #00000066; max-width:220px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.profile-info small { font-size:12px; color:#99958f; margin-top:3px; }
 
 /* Stream */
 .stream-block { flex-grow:1; background:#524b45; border-radius:8px; box-shadow: inset 0 0 5px #2c2a28; overflow:hidden; position:relative; }
@@ -60,7 +60,8 @@ body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; hei
     <div class="profile-block">
       <div class="profile-pic" title="Profile picture"></div>
       <div class="profile-info">
-        <h1>shockussy <span>SLVT Elite</span></h1>
+        <h1>shockussy</h1>
+        <div class="status-badge">Currently In-Game: Counter-Strike 2</div>
         <small>SLVT</small>
       </div>
     </div>
