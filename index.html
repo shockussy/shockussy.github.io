@@ -1,112 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>shockussy | Live</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background-color: #9a958e;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #e1ddd9;
-    height: 100vh;
-    overflow: hidden;
-  }
+/* --- existing styles --- */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#9a958e; font-family:'Segoe UI',sans-serif; color:#e1ddd9; height:100vh; overflow:hidden; }
+.container { display:flex; height:100vh; padding:30px 40px; gap:30px; }
+.left-col { flex:3; display:flex; flex-direction:column; gap:30px; }
+.right-col { flex:1.3; display:flex; flex-direction:column; gap:20px; }
 
-  .container {
-    display: flex;
-    height: 100vh;
-    padding: 30px 40px;
-    gap: 30px;
-  }
+/* Profile */
+.profile-block { background:#524b45; border-radius:8px; padding:15px; display:flex; align-items:center; gap:20px; }
+.profile-pic { width:100px; height:100px; background:url('https://i.imgur.com/ZE7aSL6.jpeg') center/cover no-repeat; border-radius:50%; border:2px solid #22201d; flex-shrink:0; transition:transform 0.3s; }
+.profile-pic:hover { transform:scale(1.05); }
+.profile-info { display:flex; flex-direction:column; color:#c7c4bf; }
+.profile-info h1 { font-size:26px; font-weight:700; color:#e1ddd9; margin-bottom:6px; }
+.profile-info small { font-size:12px; color:#99958f; }
 
-  .left-col { flex:3; display:flex; flex-direction:column; gap:30px; }
-  .right-col { flex:1.3; display:flex; flex-direction:column; gap:20px; }
+/* Stream */
+.stream-block { flex-grow:1; background:#524b45; border-radius:8px; box-shadow: inset 0 0 5px #2c2a28; overflow:hidden; position:relative; }
+.stream-block iframe { width:100%; height:100%; border:none; }
+.live-badge { position:absolute; top:15px; left:15px; background:#7a2f2f; border:1.5px solid #b35a5a; border-radius:25px; padding:6px 18px; font-weight:600; font-size:14px; color:#f5f0f0; display:flex; align-items:center; gap:10px; user-select:none; box-shadow:0 0 10px #b35a5aaa; }
+.live-dot { width:9px; height:9px; background:#f5f0f0; border-radius:50%; animation:pulse 1.5s infinite ease-in-out; }
+@keyframes pulse {0%,100%{opacity:1;}50%{opacity:0.4;}}
 
-  /* Profile block */
-  .profile-block {
-    background:#524b45; border-radius:8px; padding:15px;
-    display:flex; align-items:center; gap:20px;
-  }
-  .profile-pic {
-    width: 100px;
-    height: 100px;
-    background: url('https://i.imgur.com/ZE7aSL6.jpeg') center center/cover no-repeat;
-    border-radius: 50%;
-    border: 2px solid #22201d;
-    flex-shrink: 0;
-    transition: transform 0.3s;
-  }
-  .profile-pic:hover { transform: scale(1.05); }
-  .profile-info { display:flex; flex-direction:column; color:#c7c4bf; }
-  .profile-info h1 { font-size:26px; font-weight:700; color:#e1ddd9; margin-bottom:6px; }
-  .profile-info small { font-size:12px; color:#99958f; }
+/* Social links */
+.social-links { margin-top:15px; background:#524b45; border-radius:8px; padding:15px 20px; display:flex; gap:15px; }
+.social-links a { flex:1; background:#3c3731; color:#8ba174; text-align:center; padding:12px 0; font-weight:600; font-size:14px; border-radius:6px; text-decoration:none; box-shadow: inset 0 -2px 0 #627a4f; transition: background 0.3s, box-shadow 0.3s, transform 0.3s; }
+.social-links a:hover { background:#4a463f; box-shadow: inset 0 -4px 0 #90b062; transform: scale(1.02);}
+.social-links a.empty { background:#3c3731; color:#6b675f; cursor:default; box-shadow:none; }
+.social-links a.empty:hover { background:#3c3731; box-shadow:none; }
 
-  /* Stream */
-  .stream-block { flex-grow:1; background:#524b45; border-radius:8px;
-                  box-shadow: inset 0 0 5px #2c2a28; overflow:hidden; position:relative; }
-  .stream-block iframe { width:100%; height:100%; border:none; }
+/* Info blocks */
+.info-block { background:#524b45; border-radius:8px; padding:18px 22px; box-shadow: inset 0 0 5px #2c2a28; color:#c7c4bf; }
+.info-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
+.info-header h2 { font-weight:700; font-size:18px; color:#c7c4bf; }
+.level-badge { border:2px solid #a24141; border-radius:50%; width:38px; height:38px; color:#cda9a9; font-weight:700; font-size:16px; display:flex; justify-content:center; align-items:center; box-shadow:0 0 8px #b35a5aaa; user-select:none; }
+.block-content { font-size:14px; color:#99948f; min-height:80px; }
 
-  .live-badge {
-    position:absolute; top:15px; left:15px;
-    background:#7a2f2f; border:1.5px solid #b35a5a;
-    border-radius:25px; padding:6px 18px; font-weight:600;
-    font-size:14px; color:#f5f0f0; display:flex; align-items:center; gap:10px;
-    user-select:none; box-shadow:0 0 10px #b35a5aaa;
-  }
-  .live-dot { width:9px; height:9px; background:#f5f0f0; border-radius:50%;
-              animation:pulse 1.5s infinite ease-in-out; }
-  @keyframes pulse {0%,100%{opacity:1;}50%{opacity:0.4;}}
+/* Spotify Now Playing */
+.spotify-now { display:flex; gap:15px; align-items:center; margin-bottom:10px; }
+.spotify-art { width:60px; height:60px; border-radius:6px; box-shadow:0 0 10px #1db954aa; object-fit:cover; }
+.spotify-info { display:flex; flex-direction:column; justify-content:center; }
+.spotify-title { font-weight:700; color:#8fbf5f; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.spotify-artist { font-size:14px; color:#a1a288; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-  /* Social links */
-  .social-links { margin-top:15px; background:#524b45; border-radius:8px; padding:15px 20px; display:flex; gap:15px; }
-  .social-links a {
-    flex:1; background:#3c3731; color:#8ba174; text-align:center;
-    padding:12px 0; font-weight:600; font-size:14px; border-radius:6px;
-    text-decoration:none; box-shadow: inset 0 -2px 0 #627a4f;
-    transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
-  }
-  .social-links a:hover { background:#4a463f; box-shadow: inset 0 -4px 0 #90b062; transform: scale(1.02);}
-  .social-links a.empty { background:#3c3731; color:#6b675f; cursor:default; box-shadow:none; }
-  .social-links a.empty:hover { background:#3c3731; box-shadow:none; }
+/* Games scroll */
+.scroll-block { max-height:220px; overflow-y:auto; padding-right:8px; }
+.scroll-block::-webkit-scrollbar { width:6px; }
+.scroll-block::-webkit-scrollbar-thumb { background:#3c3731; border-radius:3px; }
 
-  /* Info blocks */
-  .info-block { background:#524b45; border-radius:8px; padding:18px 22px;
-                box-shadow: inset 0 0 5px #2c2a28; color:#c7c4bf; }
-  .info-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
-  .info-header h2 { font-weight:700; font-size:18px; color:#c7c4bf; }
-
-  .level-badge { border:2px solid #a24141; border-radius:50%; width:38px; height:38px;
-                  color:#cda9a9; font-weight:700; font-size:16px; display:flex;
-                  justify-content:center; align-items:center; box-shadow:0 0 8px #b35a5aaa; user-select:none; }
-  .block-content { font-size:14px; color:#99948f; min-height:80px; }
-
-  /* Spotify Now Playing block */
-  .spotify-now { display:flex; gap:15px; align-items:center; margin-bottom:10px; }
-  .spotify-art { width:60px; height:60px; border-radius:6px; box-shadow:0 0 10px #1db954aa; object-fit:cover; }
-  .spotify-info { display:flex; flex-direction:column; justify-content:center; }
-  .spotify-title { font-weight:700; color:#8fbf5f; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .spotify-artist { font-size:14px; color:#a1a288; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-
-  /* Games scroll */
-  .scroll-block { max-height:220px; overflow-y:auto; padding-right:8px; }
-  .scroll-block::-webkit-scrollbar { width:6px; }
-  .scroll-block::-webkit-scrollbar-thumb { background:#3c3731; border-radius:3px; }
-
-  @media (max-width:1000px){
-    .container { flex-direction:column; padding:20px 20px; gap:20px; overflow-y:auto; height:100vh; }
-    .left-col,.right-col{ flex:unset; height:auto; }
-    .stream-block{ height:300px; }
-  }
+@media (max-width:1000px){
+  .container { flex-direction:column; padding:20px; gap:20px; overflow-y:auto; height:100vh; }
+  .left-col,.right-col{ flex:unset; height:auto; }
+  .stream-block{ height:300px; }
+}
 </style>
 </head>
 <body>
+
 <div class="container">
-
-  <!-- LEFT -->
   <div class="left-col">
-
     <!-- Profile -->
     <div class="profile-block">
       <div class="profile-pic" title="Profile picture"></div>
@@ -119,23 +76,19 @@
     <!-- Twitch Stream -->
     <div class="stream-block">
       <div class="live-badge"><div class="live-dot"></div>LIVE</div>
-      <iframe src="https://player.twitch.tv/?channel=shockussy&parent=shockussy.com&parent=www.shockussy.com"
-              allowfullscreen></iframe>
+      <iframe src="https://player.twitch.tv/?channel=shockussy&parent=shockussy.com&parent=www.shockussy.com" allowfullscreen></iframe>
     </div>
 
     <!-- Social Links -->
     <div class="social-links">
-      <a href="https://twitch.tv/shockussy" target="_blank" rel="noopener noreferrer">Twitch</a>
-      <a href="https://instagram.com/chainedandquiet" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://twitch.tv/shockussy" target="_blank">Twitch</a>
+      <a href="https://instagram.com/chainedandquiet" target="_blank">Instagram</a>
       <a class="empty">Coming Soon</a>
       <a class="empty">Coming Soon</a>
     </div>
-
   </div>
 
-  <!-- RIGHT -->
   <div class="right-col">
-
     <!-- Level -->
     <div class="info-block">
       <div class="info-header">
@@ -148,20 +101,15 @@
     <!-- Spotify Now Playing -->
     <div class="info-block">
       <div class="info-header"><h2>Now Playing</h2></div>
-
       <div class="spotify-now">
-        <img src="" class="spotify-art" id="spotify-art" />
+        <img src="" class="spotify-art" id="spotify-art">
         <div class="spotify-info">
           <div class="spotify-title" id="spotify-title">Loading...</div>
           <div class="spotify-artist" id="spotify-artist"></div>
         </div>
       </div>
-
       <!-- Embedded Playlist -->
-      <iframe src="https://open.spotify.com/embed/playlist/7ti9N5pvaPuL21gQ9hhZCg"
-              width="100%" height="80" frameborder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              style="border-radius:6px; box-shadow:0 0 12px #1db954aa;"></iframe>
+      <iframe src="https://open.spotify.com/embed/playlist/7ti9N5pvaPuL21gQ9hhZCg" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:6px; box-shadow:0 0 12px #1db954aa;"></iframe>
     </div>
 
     <!-- Games -->
@@ -179,28 +127,56 @@
       <h2>Inventory</h2>
       <div class="block-content">Your inventory items here</div>
     </div>
-
   </div>
 </div>
 
-<!-- JS to cycle through playlist tracks -->
+<!-- Spotify API Script -->
 <script>
-const tracks = [
-  { title: "Track 1", artist: "Artist A", img: "https://i.scdn.co/image/ab67616d0000b273abc12345" },
-  { title: "Track 2", artist: "Artist B", img: "https://i.scdn.co/image/ab67616d0000b273def67890" },
-  { title: "Track 3", artist: "Artist C", img: "https://i.scdn.co/image/ab67616d0000b273xyz98765" }
-];
+const clientId = "79f37794bfa8475792616ebf88552156";
+const clientSecret = "9b1f8b01df424b61b986cbaf9650eea1";
+const playlistId = "7ti9N5pvaPuL21gQ9hhZCg";
 
-let index = 0;
-function updateSpotify() {
-  const track = tracks[index];
-  document.getElementById('spotify-art').src = track.img;
-  document.getElementById('spotify-title').textContent = track.title;
-  document.getElementById('spotify-artist').textContent = track.artist;
-  index = (index + 1) % tracks.length;
+async function getToken() {
+  const resp = await fetch('https://accounts.spotify.com/api/token', {
+    method:'POST',
+    headers:{
+      'Content-Type':'application/x-www-form-urlencoded',
+      'Authorization':'Basic '+btoa(clientId+':'+clientSecret)
+    },
+    body:'grant_type=client_credentials'
+  });
+  const data = await resp.json();
+  return data.access_token;
 }
-updateSpotify();
-setInterval(updateSpotify, 7000); // Change every 7s
+
+async function getPlaylistTracks(token){
+  const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`,{
+    headers:{ 'Authorization':'Bearer '+token }
+  });
+  const data = await res.json();
+  return data.items.map(i=>({
+    title:i.track.name,
+    artist:i.track.artists.map(a=>a.name).join(', '),
+    img:i.track.album.images[0].url
+  }));
+}
+
+async function startSpotify(){
+  const token = await getToken();
+  const tracks = await getPlaylistTracks(token);
+  let index=0;
+  function updateTrack(){
+    const t=tracks[index];
+    document.getElementById('spotify-art').src=t.img;
+    document.getElementById('spotify-title').textContent=t.title;
+    document.getElementById('spotify-artist').textContent=t.artist;
+    index=(index+1)%tracks.length;
+  }
+  updateTrack();
+  setInterval(updateTrack,7000);
+}
+
+startSpotify();
 </script>
 
 </body>
