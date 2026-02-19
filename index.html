@@ -73,7 +73,7 @@ body {
   border-radius:50%;
   width:38px;
   height:38px;
-  color:#cda9a9;
+  color:#ffffff; /* changed to white */
   font-weight:700;
   font-size:16px;
   display:flex;
@@ -127,6 +127,7 @@ body {
 .info-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
 .info-header h2 { font-weight:700; font-size:18px; color:#c7c4bf; }
 .block-content { font-size:14px; color:#99948f; min-height:80px; }
+.block-content p { margin-bottom:6px; }
 
 /* Games scroll */
 .scroll-block { max-height:220px; overflow-y:auto; padding-right:8px; }
@@ -183,13 +184,15 @@ body {
   <!-- RIGHT COLUMN -->
   <div class="right-col">
 
-    <!-- Level Info -->
+    <!-- Info / Bio Box -->
     <div class="info-block">
-      <div class="info-header">
-        <h2>Level</h2>
-        <div class="level-badge">17</div>
+      <div class="info-header"><h2>Info</h2></div>
+      <div class="block-content">
+        <p>Age: 22</p>
+        <p>Height: 5'10"</p>
+        <p>Location: Your City</p>
+        <p>Favorite Game: Counter-Strike 2</p>
       </div>
-      <div class="block-content">Filthy Peasant<br>100 XP</div>
     </div>
 
     <!-- Playlist -->
