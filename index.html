@@ -20,7 +20,7 @@ body {
     background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') no-repeat center center/cover;
 }
 
-/* Dark overlay */
+/* Dark blurred overlay */
 body::before {
     content: "";
     position: absolute;
@@ -37,7 +37,7 @@ body::before {
     z-index: 1;
 }
 
-/* STREAM SIDE */
+/* STREAM */
 .stream {
     flex: 2;
     position: relative;
@@ -58,7 +58,7 @@ body::before {
     border-radius: 50px;
     font-weight: bold;
     font-size: 14px;
-    display: none;
+    display: flex;
     align-items: center;
     gap: 8px;
 }
@@ -120,6 +120,17 @@ body::before {
     cursor: default;
 }
 
+/* Spotify */
+.music-player {
+    margin-top: 20px;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+.music-player:hover {
+    opacity: 1;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
     .container {
@@ -141,20 +152,22 @@ body::before {
 
 <div class="container">
 
-    <!-- STREAM -->
+    <!-- STREAM SIDE -->
     <div class="stream">
-        <div class="live-badge" id="liveBadge">
+
+        <div class="live-badge">
             <div class="live-dot"></div>
             LIVE
         </div>
 
         <iframe
-            src="https://player.twitch.tv/?channel=shockussy&parent=localhost"
+            src="https://player.twitch.tv/?channel=shockussy&parent=shockussy.com&parent=www.shockussy.com"
             allowfullscreen>
         </iframe>
+
     </div>
 
-    <!-- SOCIALS -->
+    <!-- SOCIAL + MUSIC -->
     <div class="links">
         <div class="glass">
             <h1>shockussy</h1>
@@ -164,22 +177,22 @@ body::before {
 
             <a class="empty">Coming Soon</a>
             <a class="empty">Coming Soon</a>
+
+            <!-- Spotify Track -->
+            <div class="music-player">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/track/7vJd06fgkiF6yIeBjD7csE?utm_source=generator&theme=0"
+                    width="100%"
+                    height="80"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                </iframe>
+            </div>
+
         </div>
     </div>
 
 </div>
-
-<script>
-/* SIMPLE LIVE DETECTION USING TWITCH EMBED READY STATE */
-window.addEventListener("message", function(event) {
-    if (event.data && event.data.type === "twitch-live") {
-        document.getElementById("liveBadge").style.display = "flex";
-    }
-});
-
-/* TEMPORARY: Show badge (remove if you later add real API check) */
-document.getElementById("liveBadge").style.display = "flex";
-</script>
 
 </body>
 </html>
