@@ -1,196 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>shockussy | Live</title>
-
 <style>
-* {
+  /* Reset and base */
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', sans-serif;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #5a5650, #3e3a36);
+    color: #ddd;
     height: 100vh;
     overflow: hidden;
-    color: white;
-    background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') no-repeat center center/cover;
-}
-
-/* Dark blurred overlay */
-body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(10px);
-    background: rgba(0,0,0,0.6);
-    z-index: 0;
-}
-
-.container {
-    position: relative;
+  }
+  .container {
     display: flex;
     height: 100vh;
-    z-index: 1;
-}
+    gap: 20px;
+    padding: 30px;
+  }
 
-/* STREAM */
-.stream {
+  /* STREAM PANEL */
+  .stream {
     flex: 2;
+    background: #4a4844;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
     position: relative;
-}
-
-.stream iframe {
+    overflow: hidden;
+  }
+  .stream iframe {
     width: 100%;
     height: 100%;
-}
+    border: none;
+    border-radius: 12px;
+  }
 
-/* LIVE BADGE */
-.live-badge {
+  /* LIVE BADGE */
+  .live-badge {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background: red;
-    padding: 8px 14px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 14px;
+    top: 18px;
+    left: 18px;
+    background: #8a3b3b;
+    color: #f7f3f3;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-.live-dot {
-    width: 8px;
-    height: 8px;
-    background: white;
+    user-select: none;
+    box-shadow: 0 0 8px #b85454aa;
+  }
+  .live-dot {
+    width: 10px;
+    height: 10px;
+    background: #f7f3f3;
     border-radius: 50%;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
-    100% { opacity: 1; }
-}
+  }
 
-/* SOCIAL PANEL */
-.links {
+  /* SOCIALS PANEL */
+  .links {
     flex: 1;
+    background: #3c3a37;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
+    padding: 30px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 50px;
-}
-
-.glass {
-    background: rgba(30,30,40,0.6);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
-}
-
-.glass h1 {
-    margin-bottom: 30px;
-    font-size: 28px;
+    justify-content: flex-start;
+  }
+  .links h1 {
     font-weight: 600;
-}
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #a3a49a;
+  }
 
-.glass a {
+  .links a {
     display: block;
-    text-decoration: none;
-    color: white;
-    padding: 15px;
+    background: #4f504d;
     margin-bottom: 15px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.05);
-    transition: 0.3s;
-}
+    padding: 14px 0;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #8fbf5f;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 #6a9050;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .links a:hover {
+    background: #61634f;
+    box-shadow: inset 0 -4px 0 #a2c06a;
+  }
 
-.glass a:hover {
-    background: rgba(255,255,255,0.15);
-}
-
-.empty {
-    opacity: 0.4;
+  .links a.empty {
+    background: #44433f;
+    color: #6a6a64;
     cursor: default;
-}
+    box-shadow: none;
+  }
+  .links a.empty:hover {
+    background: #44433f;
+    box-shadow: none;
+  }
 
-/* Spotify */
-.music-player {
-    margin-top: 20px;
-    opacity: 0.9;
-    transition: 0.3s;
-}
+  /* Spotify Player styling */
+  .music-player {
+    margin-top: auto;
+  }
+  .music-player iframe {
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgb(143 191 95 / 0.5);
+  }
 
-.music-player:hover {
-    opacity: 1;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
+  /* Responsive */
+  @media (max-width: 900px) {
     .container {
-        flex-direction: column;
+      flex-direction: column;
+      padding: 15px;
+      gap: 15px;
     }
-
-    .stream {
-        height: 50vh;
+    .stream, .links {
+      height: 50vh;
+      flex: unset;
     }
-
     .links {
-        height: 50vh;
+      padding: 20px 15px;
     }
-}
+  }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <!-- STREAM SIDE -->
-    <div class="stream">
-
-        <div class="live-badge">
-            <div class="live-dot"></div>
-            LIVE
-        </div>
-
-        <iframe
-            src="https://player.twitch.tv/?channel=shockussy&parent=shockussy.com&parent=www.shockussy.com"
-            allowfullscreen>
-        </iframe>
-
+  <!-- STREAM -->
+  <div class="stream">
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      LIVE
     </div>
+    <iframe
+      src="https://player.twitch.tv/?channel=shockussy&parent=shockussy.com&parent=www.shockussy.com"
+      allowfullscreen
+      >
+    </iframe>
+  </div>
 
-    <!-- SOCIAL + MUSIC -->
-    <div class="links">
-        <div class="glass">
-            <h1>shockussy</h1>
+  <!-- SOCIALS -->
+  <div class="links">
+    <h1>shockussy</h1>
+    <a href="https://twitch.tv/shockussy" target="_blank" rel="noopener noreferrer">Twitch</a>
+    <a href="https://instagram.com/chainedandquiet" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a class="empty">Coming Soon</a>
+    <a class="empty">Coming Soon</a>
 
-            <a href="https://twitch.tv/shockussy" target="_blank">Twitch</a>
-            <a href="https://instagram.com/chainedandquiet" target="_blank">Instagram</a>
-
-            <a class="empty">Coming Soon</a>
-            <a class="empty">Coming Soon</a>
-
-            <!-- Spotify Track -->
-            <div class="music-player">
-                <iframe style="border-radius:12px"
-                    src="https://open.spotify.com/embed/track/7vJd06fgkiF6yIeBjD7csE?utm_source=generator&theme=0"
-                    width="100%"
-                    height="80"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                </iframe>
-            </div>
-
-        </div>
+    <div class="music-player" style="margin-top: 20px;">
+      <iframe
+        src="https://open.spotify.com/embed/track/7vJd06fgkiF6yIeBjD7csE?utm_source=generator&theme=0"
+        width="100%"
+        height="80"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        style="border-radius:10px; box-shadow: 0 0 12px rgba(143,191,95,0.5);"
+      ></iframe>
     </div>
+  </div>
 
 </div>
 
