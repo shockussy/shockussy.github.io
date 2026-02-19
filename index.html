@@ -61,48 +61,36 @@ body {
 .live-dot { width:9px; height:9px; background:#f5f0f0; border-radius:50%; animation:pulse 1.5s infinite ease-in-out; }
 @keyframes pulse {0%,100%{opacity:1;}50%{opacity:0.4;}}
 
-/* Social links */
+/* Social links - clean 2x4 layout */
 .social-links {
   margin-top:15px;
   background: rgba(82,75,69,0.7);
   border-radius:8px;
   padding:15px 20px;
   display:flex;
-  flex-wrap: wrap;       
+  flex-wrap: wrap;   
   gap:15px;
+  justify-content: space-between;
   box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
 .social-links a {
-  flex: 1 1 120px;       
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;              
-  padding: 10px 0;
+  flex: 1 1 22%;    /* 4 per row */
+  text-align: center;
+  padding:12px 0;
   font-weight:600;
   font-size:14px;
   border-radius:6px;
   text-decoration:none;
-  color:#fff;            
-  transition: transform 0.2s;
+  color:#e1ddd9;
+  background:#3c3731;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.social-links a:hover { transform: scale(1.05); }
-
-/* Brand Colors */
-.instagram { background:#E1306C; }
-.tiktok    { background:#010101; }
-.youtube   { background:#FF0000; }
-.twitch    { background:#9146FF; }
-.x         { background:#1DA1F2; }
-.reddit    { background:#FF4500; }
-.github    { background:#181717; }
-.patreon   { background:#F96854; }
-.steam     { background:#1B2838; }
-
-/* Icons using emojis */
-.social-links a::before { content: attr(data-icon); }
+.social-links a:hover {
+  background:#4a463f;
+  transform: scale(1.03);
+}
 
 /* Info blocks */
 .info-block { background: rgba(82,75,69,0.7); border-radius:8px; padding:18px 22px; box-shadow:0 0 15px rgba(255,255,255,0.2); color:#c7c4bf; }
@@ -155,15 +143,14 @@ body {
 
     <!-- Social Links -->
     <div class="social-links">
-      <a href="https://www.instagram.com/chainedandquiet" target="_blank" class="instagram" data-icon="📸">Instagram</a>
-      <a href="https://www.tiktok.com/@shockussy" target="_blank" class="tiktok" data-icon="🎵">TikTok</a>
-      <a href="https://www.youtube.com/@Shockussy" target="_blank" class="youtube" data-icon="▶️">YouTube</a>
-      <a href="https://www.twitch.tv/shockussy" target="_blank" class="twitch" data-icon="💜">Twitch</a>
-      <a href="https://x.com/shockpussy" target="_blank" class="x" data-icon="✖️">X</a>
-      <a href="https://www.reddit.com/user/Shockussy/" target="_blank" class="reddit" data-icon="👽">Reddit</a>
-      <a href="https://github.com/shockussy" target="_blank" class="github" data-icon="🐙">GitHub</a>
-      <a href="https://www.patreon.com/cw/Shockussy" target="_blank" class="patreon" data-icon="💰">Patreon</a>
-      <a href="https://steamcommunity.com/id/Shockussy" target="_blank" class="steam" data-icon="🕹️">Steam</a>
+      <a href="https://www.instagram.com/chainedandquiet" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@shockussy" target="_blank">TikTok</a>
+      <a href="https://www.youtube.com/@Shockussy" target="_blank">YouTube</a>
+      <a href="https://x.com/shockpussy" target="_blank">X</a>
+      <a href="https://www.reddit.com/user/Shockussy/" target="_blank">Reddit</a>
+      <a href="https://github.com/shockussy" target="_blank">GitHub</a>
+      <a href="https://www.patreon.com/cw/Shockussy" target="_blank">Patreon</a>
+      <a href="https://steamcommunity.com/id/Shockussy" target="_blank">Steam</a>
     </div>
 
   </div>
